@@ -1,12 +1,14 @@
 .app {
-  --color-main: #fff;
+  --color-main-a: #93A2BF;
+  --color-main-b: #DEE9FF;
   --color-background-a: #282c34;
-  --color-background-b: #222222;
+  --color-background-b: #313640;
   --color-background-c: #272727;
   --color-background-d: #303030;
   --color-accent-a: #3DDC84;
   --color-accent-b: #4285F4;
   --color-accent-c: #EE3465;
+  --transition-a: all .2s linear;
   min-width: 320px;
   min-height: 100vh;
   display: flex;

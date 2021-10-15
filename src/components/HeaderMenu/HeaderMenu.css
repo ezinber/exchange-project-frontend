@@ -10,6 +10,10 @@
   list-style: none;
 }
 
+.header-menu__item {
+  display: flex;
+}
+
 .header-menu__list_type_drop {
   position: absolute;
   display: none;
@@ -20,11 +24,23 @@
 }
 
 .header-menu__link {
+  color: var(--color-main-a, #fff);
   text-decoration: none;
+  font-size: 16px;
+  line-height: 2;
+  transition: var(--transition-a);
+}
+
+.header-menu__link:hover {
+  color: var(--color-main-b);
 }
 
 .header-menu__link_active {
-  color: red;
+  color: var(--color-accent-a, cyan);
+}
+
+.header-menu__link_active:hover {
+  color: var(--color-accent-a, cyan);
 }
 
 .header-menu__drop-list-wrapper:hover .header-menu__list_type_drop {

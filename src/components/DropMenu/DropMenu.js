@@ -19,7 +19,7 @@ function DropMenu({
           <NavLink
             exact
             className={linkClass}
-            activeClassName={`${linkClass} ${linkClass}_active`}
+            activeClassName={`${linkClass}_active`}
             to="/markets/stock"
           >
             Фондовый
@@ -29,7 +29,7 @@ function DropMenu({
           <NavLink
             exact
             className={linkClass}
-            activeClassName={`${linkClass} ${linkClass}_active`}
+            activeClassName={`${linkClass}_active`}
             to="/markets/debt"
           >
             Долговой
@@ -39,7 +39,7 @@ function DropMenu({
           <NavLink
             exact
             className={linkClass}
-            activeClassName={`${linkClass} ${linkClass}_active`}
+            activeClassName={`${linkClass}_active`}
             to="/markets/forex"
           >
             Валютный
