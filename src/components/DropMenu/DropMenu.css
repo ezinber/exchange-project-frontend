@@ -1,0 +1,19 @@
+.drop-menu {
+  position: relative;
+}
+
+.drop-menu__list {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  display: none;
+  list-style: none;
+}
+
+.drop-menu__link {
+  text-decoration: none;
+}
+
+.drop-menu:hover .drop-menu__list {
+  display: block;
+}
