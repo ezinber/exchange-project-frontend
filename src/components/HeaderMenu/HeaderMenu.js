@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import DropMenu from '../DropMenu/DropMenu';
 import './HeaderMenu.css';
 
-function HeaderMenu({  }) {
+function HeaderMenu() {
   return (
   <nav className="header-menu">
     <ul className="header-menu__list">

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './DropMenu.css';
 
 function DropMenu({
-  linkClass = "drop-menu__link",
+  linkClass = "drop-menu__link", // класс ссылки от родительского компонента
 }) {
   return (
     <div className="drop-menu">

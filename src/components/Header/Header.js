@@ -2,7 +2,7 @@ import { memo } from 'react';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
 import './Header.css';
 
-function Header({  }) {
+function Header() {
   return (
     <header className="header">
       <img className="header__logo" alt="Casino Analytics"></img>
