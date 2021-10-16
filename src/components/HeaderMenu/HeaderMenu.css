@@ -35,11 +35,11 @@
 }
 
 .header-menu__link_active {
-  color: var(--color-accent-a, cyan);
+  color: var(--color-accent-b, cyan);
 }
 
 .header-menu__link_active:hover {
-  color: var(--color-accent-a, cyan);
+  color: var(--color-accent-b, cyan);
 }
 
 .header-menu__drop-list-wrapper:hover .header-menu__list_type_drop {

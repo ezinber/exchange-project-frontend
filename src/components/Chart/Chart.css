@@ -1,0 +1,178 @@
+@import '/src/vendor/highcharts.css';
+
+.highcharts-container {
+  font-family: inherit;
+}
+
+.highcharts-root text {
+  stroke-width: 0;
+  fill: var(--color-main-a);
+}
+
+.highcharts-title {
+  font-size: 24px;
+}
+
+.highcharts-background {
+	fill: none;
+	stroke: none;
+	stroke-width: 0;
+}
+
+.highcharts-grid-line {
+  stroke: var(--color-background-b);
+}
+
+.highcharts-axis-labels {
+  cursor: default;
+  font-size: 0.9em;
+}
+
+.highcharts-axis-line {
+  stroke: var(--color-main-a);
+}
+
+.highcharts-tick {
+  stroke: var(--color-main-a);
+}
+
+.highcharts-crosshair-thin {
+  stroke: var(--color-main-a, #fff);
+}
+
+.highcharts-tooltip-box {
+  stroke-width: 0;
+  fill: var(--color-background-b);
+  fill-opacity: 0.85;
+}
+
+.highcharts-tooltip-box .highcharts-label-box {
+  fill: var(--color-background-b);
+  fill-opacity: 0.85;
+}
+
+.highcharts-button {
+  fill: var(--color-background-b);
+  stroke: none;
+}
+
+.highcharts-button text {
+  transition: var(--transition-a);
+}
+
+.highcharts-button-hover {
+  cursor: pointer;
+}
+
+.highcharts-button-hover text {
+  fill: var(--color-main-b, #fff);
+  font-weight: normal;
+  transition: var(--transition-a);
+}
+
+.highcharts-button-pressed text {
+  fill: var(--color-accent-b);
+  font-weight: normal;
+}
+
+.highcharts-button-hover .highcharts-button-pressed text {
+  fill: var(--color-accent-b);
+}
+
+.highcharts-button-disabled text {
+  fill: var(--color-background-a);
+}
+
+.highcharts-range-input {
+  stroke-width: 0;
+}
+
+.highcharts-range-input:hover {
+  cursor: pointer;
+}
+
+.highcharts-navigator-outline {
+  stroke: none;
+}
+
+.highcharts-navigator-xaxis .highcharts-grid-line {
+  stroke: var(--color-background-b, #555);
+}
+
+.highcharts-scrollbar {
+  display: none;
+}
+
+.highcharts-navigator-handle {
+  stroke: var(--color-main-a, #ccc);
+  fill: var(--color-background-b, #fff);
+}
+
+
+
+.highcharts-color-0 {
+  fill: var(--color-accent-a, green);
+  stroke: var(--color-accent-a, green);
+}
+
+.highcharts-color-1 {
+  fill: var(--color-accent-c, red);
+  stroke: var(--color-accent-c, red);
+}
+
+.highcharts-color-2 {
+  fill: var(--color-accent-b, cyan);
+  stroke: var(--color-accent-b, cyan);
+}
+
+.highcharts-graph {
+  stroke-width: 0;
+}
+
+.highcharts-area {
+  fill-opacity: .5;
+  stroke-width: 0;
+  transition: var(--transition-a);
+}
+
+/* Градиент графиков */
+
+#gradient-0 stop {
+	stop-color: var(--color-accent-a, green);;
+}
+
+#gradient-0 stop[offset="0"] {
+	stop-opacity: .8;
+}
+
+#gradient-0 stop[offset="1"] {
+	stop-opacity: .25;
+}
+
+#gradient-1 stop {
+	stop-color: var(--color-accent-c, red);
+}
+
+#gradient-1 stop[offset="0"] {
+	stop-opacity: .8;
+}
+
+#gradient-1 stop[offset="1"] {
+	stop-opacity: .25;
+}
+
+.highcharts-color-0 .highcharts-area {
+	fill-opacity: .7;
+	fill: url(#gradient-0);
+}
+
+.highcharts-color-1 .highcharts-area {
+	fill-opacity: .7;
+	fill: url(#gradient-1);
+}
+
+.highcharts-series-hover .highcharts-area {
+  stroke-width: 2;
+  fill-opacity: 1;
+  position: relative;
+}
