@@ -4,7 +4,10 @@ import './DropMenu.css';
 
 function DropMenu({
   linkClass = "drop-menu__link", // класс ссылки от родительского компонента
+  position // 'left' или 'right'. По умолчанию внизу
 }) {
+  const listClassMod = position ? ` drop-menu__list_pos_${position}` : '';
+
   return (
     <div className="drop-menu">
       <NavLink
@@ -14,7 +17,7 @@ function DropMenu({
       >
         Рынки
       </NavLink>
-      <ul className="drop-menu__list">
+      <ul className={`drop-menu__list${listClassMod}`}>
         <li className="drop-menu__item">
           <NavLink
             exact

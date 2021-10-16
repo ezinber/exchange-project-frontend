@@ -6,7 +6,6 @@
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 15px;
   list-style: none;
 }
 
@@ -24,10 +23,10 @@
 }
 
 .header-menu__link {
+  padding: .5rem;
   color: var(--color-main-a, #fff);
   text-decoration: none;
   font-size: 16px;
-  line-height: 2;
   transition: var(--transition-a);
 }
 
