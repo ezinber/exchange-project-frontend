@@ -32,6 +32,27 @@ function HeaderMenu() {
         </NavLink>
       </li>
     </ul>
+    <ul className="header-menu__list">
+      <li className="header-menu__item">
+        <NavLink
+          className="header-menu__link header-menu__link_type_auth"
+          activeClassName="header-menu__link_hidden"
+          to="/register"
+        >
+          Регистрация
+        </NavLink>
+      </li>
+
+      <li className="header-menu__item">
+        <NavLink
+          className="header-menu__link header-menu__link_type_auth"
+          activeClassName="header-menu__link_hidden"
+          to="/login"
+        >
+          Войти
+        </NavLink>
+      </li>
+    </ul>
   </nav>
   )
 }

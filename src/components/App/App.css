@@ -20,3 +20,14 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.button {
+  transition: var(--transition-a);
+  border: none;
+  outline: none;
+}
+
+.button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

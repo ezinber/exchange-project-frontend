@@ -5,7 +5,10 @@ import './Header.css';
 function Header() {
   return (
     <header className="header">
-      <img className="header__logo" alt="Casino Analytics"></img>
+      <img
+        className="header__logo"
+        alt="Casino&nbsp;Analytics"
+      ></img>
       <HeaderMenu />
     </header>
   )

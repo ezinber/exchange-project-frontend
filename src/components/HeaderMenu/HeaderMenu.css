@@ -1,5 +1,8 @@
 .header-menu {
   margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .header-menu__list {
@@ -11,15 +14,6 @@
 
 .header-menu__item {
   display: flex;
-}
-
-.header-menu__list_type_drop {
-  position: absolute;
-  display: none;
-}
-
-.header-menu__drop-list-wrapper {
-  position: relative;
 }
 
 .header-menu__link {
@@ -38,10 +32,25 @@
   color: var(--color-accent-b, cyan);
 }
 
+.header-menu__link_hidden {
+  display: none;
+}
+
+.header-menu__link_type_auth {
+  margin: 0 .5rem;
+  background-color: var(--color-background-b);
+  border-radius: 4px;
+}
+
 .header-menu__link_active:hover {
   color: var(--color-accent-b, cyan);
 }
 
 .header-menu__drop-list-wrapper:hover .header-menu__list_type_drop {
   display: block;
+}
+
+
+.header-menu__item:has(.header-menu__link_hidden) {
+  display: none;
 }
