@@ -31,6 +31,9 @@ function App() {
   const history = useHistory();
 
   const handleSignin = (email, password) => {
+    setCurrentUser({ email });
+    history.push('/markets');
+    /* TODO: подключить запрос
     setIsLoading(true);
     signin(email, password)
       .then(() => {
@@ -49,6 +52,12 @@ function App() {
         return setResponseMessage(somethingWentWrong);
       })
       .finally(() => setIsLoading(false));
+    */
+  }
+
+  const handleSignout = () => {
+    setCurrentUser(null);
+    history.push('/');
   }
 
   const handleResetResponseMessage = () => setResponseMessage(null);
@@ -58,10 +67,12 @@ function App() {
       <IsLoadingContext.Provider value={isLoading}>
         <ResponseMessageContext.Provider value={{responseMessage, handleResetResponseMessage}}>
           <div className="app">
-            <Header />
+            <Header
+              onLogout={handleSignout}
+            />
             <Switch>
               <Route path="/markets/stock">
-                <Chart />
+                <p>markets</p>
               </Route>
               <Route path="/markets/debt">
                 <p>debt</p>
@@ -70,7 +81,7 @@ function App() {
                 <p>forex</p>
               </Route>
               <Route path="/markets">
-                <p>markets</p>
+                <Chart />
               </Route>
               <Route path="/about">
                 <p>about</p>
