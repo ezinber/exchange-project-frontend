@@ -1,4 +1,4 @@
-import { memo, useContext } from "react";
+import { memo, useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import DropMenu from "../DropMenu/DropMenu";
@@ -7,84 +7,95 @@ import "./HeaderMenu.css";
 function HeaderMenu({ onLogout }) {
   const isLoggedIn = useContext(CurrentUserContext);
 
+  const [isMenuOpened, setIsMenuOpened] = useState(false);
+
+  const handleMenuButtonClick = () => setIsMenuOpened(!isMenuOpened);
+
   return (
-    <nav className="header-menu">
-      <ul className="header-menu__list">
-        <li className="header-menu__item">
-          <NavLink
-            exact
-            className="header-menu__link"
-            activeClassName="header-menu__link_active"
-            to="/"
-          >
-            Главная
-          </NavLink>
-        </li>
-
-        {isLoggedIn && (
+    <>
+      <nav className={`header-menu${isMenuOpened ? ' header-menu_visible' : ''}`}>
+        <ul className="header-menu__list">
           <li className="header-menu__item">
-            <DropMenu linkClass={"header-menu__link"} />
+            <NavLink
+              exact
+              className="header-menu__link"
+              activeClassName="header-menu__link_active"
+              to="/"
+            >
+              Главная
+            </NavLink>
           </li>
-        )}
 
-        <li className="header-menu__item">
-          <NavLink
-            className="header-menu__link"
-            activeClassName="header-menu__link_active"
-            to="/about"
-          >
-            О&nbsp;компании
-          </NavLink>
-        </li>
-      </ul>
+          {isLoggedIn && (
+            <li className="header-menu__item">
+              <DropMenu linkClass={"header-menu__link"} />
+            </li>
+          )}
 
-      <ul className="header-menu__list">
-      {isLoggedIn ? (
-        <>
           <li className="header-menu__item">
             <NavLink
               className="header-menu__link"
-              to="/"
+              activeClassName="header-menu__link_active"
+              to="/about"
             >
-              {isLoggedIn.email}
+              О&nbsp;компании
             </NavLink>
           </li>
+        </ul>
 
-          <li className="header-menu__item">
-            <button
-              onClick={onLogout}
-              className="header-menu__link header-menu__link_type_auth"
-              to="/"
-            >
-              Выйти
-            </button>
-          </li>
-        </>
-      ) : (
-        <>
-          <li className="header-menu__item">
-            <NavLink
-              className="header-menu__link header-menu__link_type_auth"
-              activeClassName="header-menu__link_hidden"
-              to="/register"
-            >
-              Регистрация
-            </NavLink>
-          </li>
+        <ul className="header-menu__list">
+        {isLoggedIn ? (
+          <>
+            <li className="header-menu__item">
+              <NavLink
+                className="header-menu__link"
+                to="/"
+              >
+                {isLoggedIn.username}
+              </NavLink>
+            </li>
 
-          <li className="header-menu__item">
-            <NavLink
-              className="header-menu__link header-menu__link_type_auth"
-              activeClassName="header-menu__link_hidden"
-              to="/login"
-            >
-              Войти
-            </NavLink>
-          </li>
-        </>
-      )}
-      </ul>
-    </nav>
+            <li className="header-menu__item">
+              <button
+                onClick={onLogout}
+                className="header-menu__link header-menu__link_type_auth"
+                to="/"
+              >
+                Выйти
+              </button>
+            </li>
+          </>
+        ) : (
+          <>
+            <li className="header-menu__item">
+              <NavLink
+                className="header-menu__link header-menu__link_type_auth"
+                activeClassName="header-menu__link_hidden"
+                to="/register"
+              >
+                Регистрация
+              </NavLink>
+            </li>
+
+            <li className="header-menu__item">
+              <NavLink
+                className="header-menu__link header-menu__link_type_auth"
+                activeClassName="header-menu__link_hidden"
+                to="/login"
+              >
+                Войти
+              </NavLink>
+            </li>
+          </>
+        )}
+        </ul>
+      </nav>
+      <button
+        className="header-menu__button"
+        type="button"
+        onClick={handleMenuButtonClick}
+      />
+    </>
   );
 }
 
