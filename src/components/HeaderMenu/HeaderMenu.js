@@ -91,7 +91,7 @@ function HeaderMenu({ onLogout }) {
         </ul>
       </nav>
       <button
-        className="header-menu__button"
+        className={`header-menu__button${isMenuOpened ? ' header-menu__button_type_close' : ''}`}
         type="button"
         onClick={handleMenuButtonClick}
       />

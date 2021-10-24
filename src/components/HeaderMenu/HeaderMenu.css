@@ -18,9 +18,19 @@
 }
 
 .header-menu__button {
-  z-index: 1;
   margin: auto 0 auto auto;
+  width: 24px;
+  height: 24px;
+  background: url('../../images/menu-button.svg') center no-repeat;
+  background-size: cover;
   display: none;
+  border: none;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.header-menu__button_type_close {
+  background: url('../../images/close-button.svg') center no-repeat;
 }
 
 .header-menu__link {
@@ -78,7 +88,10 @@
     left: 0;
     visibility: hidden;
     opacity: 0;
+    /*  TODO: избавиться от анимации сдвига при
+        изменении ширины экрана
     transition: var(--transition-a);
+    */
   }
 
   .header-menu::before {
