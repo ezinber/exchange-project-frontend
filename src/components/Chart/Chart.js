@@ -13,9 +13,11 @@ const options = {
   },
   series: [
     {
+      name: "ask",
       data: [1, 2, 3, 4, 4, 5, 6, 7, 9, 5],
     },
     {
+      name: "bid",
       data: [2, 3, 1, 1, 3, 2, 4, 4, 6, 8],
     },
   ],
