@@ -130,7 +130,8 @@
 }
 
 .highcharts-graph {
-  stroke-width: 0;
+  stroke-width: 1.5;
+  transition: var(--transition-a);
 }
 
 .highcharts-area {
@@ -179,4 +180,8 @@
   stroke-width: 2;
   fill-opacity: 1;
   position: relative;
+}
+
+.highcharts-series-hover .highcharts-graph {
+  stroke-width: 2;
 }

@@ -5,7 +5,7 @@ import "./Chart.css";
 
 const options = {
   chart: {
-    type: "areaspline",
+    type: "spline",
     styledMode: true,
   },
   title: {
