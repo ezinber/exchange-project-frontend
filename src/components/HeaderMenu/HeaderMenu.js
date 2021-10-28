@@ -33,9 +33,21 @@ function HeaderMenu({ onLogout }) {
           </li>
 
           {isLoggedIn && (
+            <DropMenu linkClass={"header-menu__link"}>
+              <NavLink
+                exact
+                className="header-menu__link"
+                activeClassName="header-menu__link_active"
+                to="/markets"
+              >
+                Рынки
+              </NavLink>
+            </DropMenu>
+            /*
             <li className="header-menu__item">
               <DropMenu linkClass={"header-menu__link"} />
             </li>
+            */
           )}
 
           <li className="header-menu__item">

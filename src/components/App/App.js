@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { IsLoadingContext } from "../../contexts/IsLoadingContext";
 import { ResponseMessageContext } from "../../contexts/ResponseMessageContext";
-import { signin, checkToken } from "../../utils/MainApi";
+import { signin, checkToken, getOrderBookData } from "../../utils/MainApi";
 import Header from "../Header/Header";
 import Chart from "../Chart/Chart";
 import Login from "../Login/Login";
@@ -22,9 +22,10 @@ const {
 } = responseErrorMessages;
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({ username: 'trtrtr'});
+  const [currentUser, setCurrentUser] = useState({ username: 'name' });
   const [isLoading, setIsLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState(null);
+  const [currentMaxVolumes, setCurrentMaxVolumes] = useState(null);
 
   const history = useHistory();
 
@@ -68,6 +69,28 @@ function App() {
 
   const handleResetResponseMessage = () => setResponseMessage(null);
 
+  const createArrayFromValues = (arr, key) => arr.map((i) => i[key]);
+
+  const handleGetOrderBookData = (type, start, end, ticker, key) => {
+    const jwt = localStorage.getItem("jwt");
+    getOrderBookData(type, start, end, ticker, jwt)
+      .then((res) => createArrayFromValues(res.results, key))
+      .then((res) => {
+        setCurrentMaxVolumes(res);
+      })
+      .catch(() => console.log("error"));
+  };
+
+  useEffect(() => {
+    handleGetOrderBookData(
+      "asks",
+      "2021-10-20|16:44:00",
+      "2021-10-20|16:48:20",
+      "JLL",
+      "max_volume"
+    );
+  }, []);
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <IsLoadingContext.Provider value={isLoading}>
@@ -87,7 +110,7 @@ function App() {
                 <p>forex</p>
               </Route>
               <Route path="/markets">
-                <Chart />
+                <Chart volumes={currentMaxVolumes} />
               </Route>
               <Route path="/about">
                 <p>about</p>

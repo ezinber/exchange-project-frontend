@@ -2,52 +2,37 @@ import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import './DropMenu.css';
 
+const headerLinks = [
+  { name: 'Фондовый', path: '/markets/stock' },
+  { name: 'Долговой', path: '/markets/debt' },
+  { name: 'Валютный', path: '/markets/forex' },
+];
+
 function DropMenu({
   linkClass = "drop-menu__link", // класс ссылки от родительского компонента
-  position // 'left' или 'right'. По умолчанию внизу
+  position, // 'left' или 'right'. По умолчанию внизу
+  links = headerLinks, // массив объектов с ссылками типа: { name, path }
+  children // элемент, активирующий список
 }) {
   const listClassMod = position ? ` drop-menu__list_pos_${position}` : '';
 
   return (
     <div className="drop-menu">
-      <NavLink
-        className={linkClass}
-        activeClassName={`${linkClass} ${linkClass}_active`}
-        to="/markets"
-      >
-        Рынки
-      </NavLink>
+      {children}
+
       <ul className={`drop-menu__list${listClassMod}`}>
-        <li className="drop-menu__item">
-          <NavLink
-            exact
-            className={linkClass}
-            activeClassName={`${linkClass}_active`}
-            to="/markets/stock"
-          >
-            Фондовый
-          </NavLink>
-        </li>
-        <li className="drop-menu__item">
-          <NavLink
-            exact
-            className={linkClass}
-            activeClassName={`${linkClass}_active`}
-            to="/markets/debt"
-          >
-            Долговой
-          </NavLink>
-        </li>
-        <li className="drop-menu__item">
-          <NavLink
-            exact
-            className={linkClass}
-            activeClassName={`${linkClass}_active`}
-            to="/markets/forex"
-          >
-            Валютный
-          </NavLink>
-        </li>
+        {links.map((link, index) => (
+          <li className="drop-menu__item">
+            <NavLink
+              key={index}
+              className={linkClass}
+              activeClassName={`${linkClass} ${linkClass}_active`}
+              to={link.path}
+            >
+              {link.name}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </div>
   )
