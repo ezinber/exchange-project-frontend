@@ -22,9 +22,8 @@ function DropMenu({
 
       <ul className={`drop-menu__list${listClassMod}`}>
         {links.map((link, index) => (
-          <li className="drop-menu__item">
+          <li className="drop-menu__item" key={index}>
             <NavLink
-              key={index}
               className={linkClass}
               activeClassName={`${linkClass} ${linkClass}_active`}
               to={link.path}

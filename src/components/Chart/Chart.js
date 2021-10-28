@@ -1,11 +1,11 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
+import { createArrayFromValues } from '../../utils/utils';
 import "./Chart.css";
-import { useState } from "react/cjs/react.development";
 
-function Chart({ volumes }) {
-  //const [maxVolumes, setMaxVolumes] = useState(volumes);
+function Chart({ orderBookData }) {
+  const [maxValues, setMaxValues] = useState({ asks: [], bids: []})
 
   const options = {
     chart: {
@@ -18,11 +18,11 @@ function Chart({ volumes }) {
     series: [
       {
         name: "ask",
-        data: /*[1, 2, 3, 4, 4, 5, 6, 7, 9, 5]*/ volumes,
+        data: maxValues.asks,
       },
       {
         name: "bid",
-        data: [2, 3, 1, 1, 3, 2, 4, 4, 6, 8],
+        data: maxValues.bids,
       },
     ],
     defs: {
@@ -64,6 +64,13 @@ function Chart({ volumes }) {
       },
     },
   };
+
+  useEffect(() => {
+    setMaxValues({
+      asks: createArrayFromValues(orderBookData.asks, 'max_volume'),
+      bids: createArrayFromValues(orderBookData.bids, 'max_volume_price'),
+    })
+  }, [orderBookData])
 
   return (
     <HighchartsReact

@@ -4,6 +4,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { IsLoadingContext } from "../../contexts/IsLoadingContext";
 import { ResponseMessageContext } from "../../contexts/ResponseMessageContext";
 import { signin, checkToken, getOrderBookData } from "../../utils/MainApi";
+import ProtectedRoute from "../hocs/ProtectedRoute";
 import Header from "../Header/Header";
 import Chart from "../Chart/Chart";
 import Login from "../Login/Login";
@@ -22,10 +23,13 @@ const {
 } = responseErrorMessages;
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({ username: 'name' });
+  const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState(null);
-  const [currentMaxVolumes, setCurrentMaxVolumes] = useState(null);
+  const [currentOrderBookData, setCurrentOrderBookData] = useState({
+    asks: [],
+    bids: [],
+  });
 
   const history = useHistory();
 
@@ -69,26 +73,21 @@ function App() {
 
   const handleResetResponseMessage = () => setResponseMessage(null);
 
-  const createArrayFromValues = (arr, key) => arr.map((i) => i[key]);
-
-  const handleGetOrderBookData = (type, start, end, ticker, key) => {
+  const handleGetOrderBookData = (start, end, ticker) => {
     const jwt = localStorage.getItem("jwt");
-    getOrderBookData(type, start, end, ticker, jwt)
-      .then((res) => createArrayFromValues(res.results, key))
-      .then((res) => {
-        setCurrentMaxVolumes(res);
-      })
+    Promise.all([
+      getOrderBookData("asks", start, end, ticker, jwt),
+      getOrderBookData("bids", start, end, ticker, jwt),
+    ])
+      .then(([asks, bids]) =>
+        setCurrentOrderBookData({ asks: asks.results, bids: bids.results })
+      )
       .catch(() => console.log("error"));
   };
 
   useEffect(() => {
-    handleGetOrderBookData(
-      "asks",
-      "2021-10-20|16:44:00",
-      "2021-10-20|16:48:20",
-      "JLL",
-      "max_volume"
-    );
+    handleTokenCheck();
+    handleGetOrderBookData("2021-10-20|16:44:00", "2021-10-20|16:48:20", "JLL");
   }, []);
 
   return (
@@ -100,18 +99,18 @@ function App() {
           <div className="app">
             <Header onLogout={handleSignout} />
             <Switch>
-              <Route path="/markets/stock">
+              <ProtectedRoute path="/markets/stock">
                 <p>markets</p>
-              </Route>
-              <Route path="/markets/debt">
+              </ProtectedRoute>
+              <ProtectedRoute path="/markets/debt">
                 <p>debt</p>
-              </Route>
-              <Route path="/markets/forex">
+              </ProtectedRoute>
+              <ProtectedRoute path="/markets/forex">
                 <p>forex</p>
-              </Route>
-              <Route path="/markets">
-                <Chart volumes={currentMaxVolumes} />
-              </Route>
+              </ProtectedRoute>
+              <ProtectedRoute path="/markets">
+                <Chart orderBookData={currentOrderBookData} />
+              </ProtectedRoute>
               <Route path="/about">
                 <p>about</p>
               </Route>
