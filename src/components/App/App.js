@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route, useHistory, Redirect } from "react-router-dom";
 
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { IsLoadingContext } from "../../contexts/IsLoadingContext";
@@ -145,10 +145,16 @@ function App() {
                 <p>about</p>
               </Route>
               <Route path="/login">
-                <Login onLogin={handleSignin} />
+                {!currentUser
+                  ? <Login onLogin={handleSignin} />
+                  : <Redirect to="/markets" />
+                }
               </Route>
               <Route path="/Register">
-                <Register />
+                {!currentUser
+                  ? <Register />
+                  : <Redirect to="/markets" />
+                }
               </Route>
               <Route path="/">
                 <Main />

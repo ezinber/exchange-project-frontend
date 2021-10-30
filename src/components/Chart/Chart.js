@@ -1,8 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
+
 import { IsLoadingContext } from "../../contexts/IsLoadingContext";
+
+import Preloader from "../Preloader/Preloader";
+
 import { createDataAndKeyArray } from '../../utils/utils';
+
 import "./Chart.css";
 
 function Chart({ orderBookData }) {
@@ -79,7 +84,7 @@ function Chart({ orderBookData }) {
   return (
     <>
       {isLoading ? (
-        <p>Loading</p>
+        <Preloader />
       ) : (
       <HighchartsReact
         highcharts={Highcharts}
