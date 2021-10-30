@@ -9,6 +9,7 @@
   --color-accent-b: #4285F4;
   --color-accent-c: #EE3465;
   --transition-a: all .2s linear;
+  padding: 0 calc(50% - 500px);
   min-width: 320px;
   min-height: 100vh;
   display: flex;

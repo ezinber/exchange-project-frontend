@@ -82,3 +82,12 @@ export const getOrderBookData = (type, start, end, ticker, token) => {
     }
   ).then((res) => handleFirstResponse(res));
 };
+
+export const getOrderBookTickers = (token) => {
+  return fetch(`${BASE_URL}/data/shares/get-orderbook-tickers-list/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => handleFirstResponse(res));
+};

@@ -1,14 +1,25 @@
 import { useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
+
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { IsLoadingContext } from "../../contexts/IsLoadingContext";
 import { ResponseMessageContext } from "../../contexts/ResponseMessageContext";
-import { signin, checkToken, getOrderBookData } from "../../utils/MainApi";
+
 import ProtectedRoute from "../hocs/ProtectedRoute";
+
+import Main from "../Main/Main";
 import Header from "../Header/Header";
 import Chart from "../Chart/Chart";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import SelectForm from "../SelectForm/SelectForm";
+
+import {
+  signin,
+  checkToken,
+  getOrderBookData,
+  getOrderBookTickers,
+} from "../../utils/MainApi";
 import {
   responseSuccessMessages,
   responseErrorMessages,
@@ -26,6 +37,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState(null);
+  const [orderBookTickersList, setOrderBookTickersList] = useState([]);
+  const [currentTicker, setCurrentTicker] = useState('');
   const [currentOrderBookData, setCurrentOrderBookData] = useState({
     asks: [],
     bids: [],
@@ -74,21 +87,31 @@ function App() {
   const handleResetResponseMessage = () => setResponseMessage(null);
 
   const handleGetOrderBookData = (start, end, ticker) => {
+    setIsLoading(true);
     const jwt = localStorage.getItem("jwt");
     Promise.all([
       getOrderBookData("asks", start, end, ticker, jwt),
       getOrderBookData("bids", start, end, ticker, jwt),
     ])
-      .then(([asks, bids]) =>
-        setCurrentOrderBookData({ asks: asks.results, bids: bids.results })
-      )
-      .catch(() => console.log("error"));
+      .then(([asks, bids]) => setCurrentOrderBookData({ asks, bids }))
+      .catch(() => console.log("error"))
+      .finally(() => setIsLoading(false));
   };
 
+  const handleGetOrderBookTickers = () => {
+    const jwt = localStorage.getItem("jwt");
+    getOrderBookTickers(jwt)
+      .then((res) => setOrderBookTickersList(res.tickers_list))
+      .catch(() => console.log('error'));
+  };
+
+  const handleSetCurrentTicker = (ticker) => setCurrentTicker(ticker);
+
   useEffect(() => {
-    handleTokenCheck();
-    handleGetOrderBookData("2021-10-20|16:44:00", "2021-10-20|16:48:20", "JLL");
-  }, []);
+    !currentUser && handleTokenCheck()
+    orderBookTickersList.length <= 0 && handleGetOrderBookTickers();
+    currentTicker && handleGetOrderBookData("2021-10-25|00:44:00", "2021-10-29|23:59:20", currentTicker);
+  }, [currentTicker, orderBookTickersList, currentUser]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -109,7 +132,14 @@ function App() {
                 <p>forex</p>
               </ProtectedRoute>
               <ProtectedRoute path="/markets">
-                <Chart orderBookData={currentOrderBookData} />
+                <SelectForm
+                  list={orderBookTickersList}
+                  setValue={handleSetCurrentTicker}
+                  currentItem={currentTicker}
+                />
+                <Chart
+                  orderBookData={currentOrderBookData}
+                />
               </ProtectedRoute>
               <Route path="/about">
                 <p>about</p>
@@ -121,7 +151,7 @@ function App() {
                 <Register />
               </Route>
               <Route path="/">
-                <p>main</p>
+                <Main />
               </Route>
             </Switch>
           </div>

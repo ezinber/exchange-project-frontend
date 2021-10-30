@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import { createArrayFromValues } from '../../utils/utils';
+import { IsLoadingContext } from "../../contexts/IsLoadingContext";
+import { createDataAndKeyArray } from '../../utils/utils';
 import "./Chart.css";
 
 function Chart({ orderBookData }) {
-  const [maxValues, setMaxValues] = useState({ asks: [], bids: []})
+  const [maxValues, setMaxValues] = useState({ asks: [[]], bids: [[]] })
+  const isLoading = useContext(IsLoadingContext);
 
   const options = {
     chart: {
@@ -25,6 +27,7 @@ function Chart({ orderBookData }) {
         data: maxValues.bids,
       },
     ],
+    /* настройка градиентов area
     defs: {
       gradient0: {
         tagName: "linearGradient",
@@ -63,21 +66,28 @@ function Chart({ orderBookData }) {
         ],
       },
     },
+    */
   };
 
   useEffect(() => {
     setMaxValues({
-      asks: createArrayFromValues(orderBookData.asks, 'max_volume'),
-      bids: createArrayFromValues(orderBookData.bids, 'max_volume_price'),
+      asks: createDataAndKeyArray(orderBookData.asks, 'datetime', 'max_volume'),
+      bids: createDataAndKeyArray(orderBookData.bids, 'datetime', 'max_volume'),
     })
   }, [orderBookData])
 
   return (
-    <HighchartsReact
-      highcharts={Highcharts}
-      constructorType={"stockChart"}
-      options={options}
-    />
+    <>
+      {isLoading ? (
+        <p>Loading</p>
+      ) : (
+      <HighchartsReact
+        highcharts={Highcharts}
+        constructorType={"stockChart"}
+        options={options}
+      />
+      )}
+    </>
   );
 }
 
