@@ -25,6 +25,7 @@ import {
   responseErrorMessages,
 } from "../../utils/constants";
 import "./App.css";
+import Profile from "../Profile/Profile";
 
 const { successUpdateMessage } = responseSuccessMessages;
 const {
@@ -38,13 +39,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState(null);
   const [orderBookTickersList, setOrderBookTickersList] = useState([]);
-  const [currentTicker, setCurrentTicker] = useState('');
   const [currentOrderBookData, setCurrentOrderBookData] = useState({
     asks: [],
     bids: [],
   });
 
   const history = useHistory();
+  const currentTicker = currentOrderBookData.asks[0]?.ticker || '';
 
   const handleSignin = (email, password) => {
     setIsLoading(true);
@@ -101,17 +102,22 @@ function App() {
   const handleGetOrderBookTickers = () => {
     const jwt = localStorage.getItem("jwt");
     getOrderBookTickers(jwt)
-      .then((res) => setOrderBookTickersList(res.tickers_list))
+      .then((res) => {
+        setOrderBookTickersList(res.tickers_list);
+        handleSetCurrentTicker(res.tickers_list[0]);
+      })
       .catch(() => console.log('error'));
   };
 
-  const handleSetCurrentTicker = (ticker) => setCurrentTicker(ticker);
+  const handleSetCurrentTicker = (ticker) =>
+    handleGetOrderBookData("2021-10-25|00:44:00", "2021-10-29|23:59:20", ticker);
 
   useEffect(() => {
-    !currentUser && handleTokenCheck()
-    orderBookTickersList.length <= 0 && handleGetOrderBookTickers();
-    currentTicker && handleGetOrderBookData("2021-10-25|00:44:00", "2021-10-29|23:59:20", currentTicker);
-  }, [currentTicker, orderBookTickersList, currentUser]);
+    console.log('app-mount');
+
+    handleTokenCheck();
+    handleGetOrderBookTickers();
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -125,37 +131,51 @@ function App() {
               <ProtectedRoute path="/markets/stock">
                 <p>markets</p>
               </ProtectedRoute>
+
               <ProtectedRoute path="/markets/debt">
                 <p>debt</p>
               </ProtectedRoute>
+
               <ProtectedRoute path="/markets/forex">
                 <p>forex</p>
               </ProtectedRoute>
+
               <ProtectedRoute path="/markets">
                 <SelectForm
                   list={orderBookTickersList}
-                  setValue={handleSetCurrentTicker}
-                  currentItem={currentTicker}
+                  selectValue={handleSetCurrentTicker}
+                  currentValue={currentTicker}
                 />
                 <Chart
                   orderBookData={currentOrderBookData}
                 />
               </ProtectedRoute>
+
+              <ProtectedRoute path="/profile">
+                <Profile
+                  list={orderBookTickersList}
+                  currentValue={currentTicker}
+                />
+              </ProtectedRoute>
+
               <Route path="/about">
                 <p>about</p>
               </Route>
+
               <Route path="/login">
                 {!currentUser
                   ? <Login onLogin={handleSignin} />
                   : <Redirect to="/markets" />
                 }
               </Route>
+
               <Route path="/Register">
                 {!currentUser
                   ? <Register />
                   : <Redirect to="/markets" />
                 }
               </Route>
+
               <Route path="/">
                 <Main />
               </Route>

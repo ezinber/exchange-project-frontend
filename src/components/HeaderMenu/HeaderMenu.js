@@ -65,7 +65,11 @@ function HeaderMenu({ onLogout }) {
           {isLoggedIn ? (
             <>
               <li className="header-menu__item">
-                <NavLink className="header-menu__link" to="/">
+                <NavLink
+                  className="header-menu__link"
+                  activeClassName="header-menu__link_active"
+                  to="/profile"
+                >
                   {isLoggedIn.username}
                 </NavLink>
               </li>
