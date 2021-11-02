@@ -1,7 +1,14 @@
 import { memo, useState } from "react";
 import "./SelectForm.css";
 
-function SelectForm({ list, selectValue = null, currentValue }) {
+function SelectForm({ 
+  list,
+  title = 'Инструмент',
+  idLabel = 'select',
+  formId,
+  selectValue = null,
+  currentValue
+}) {
   const [value, setValue] = useState(currentValue);
 
   const handleSetValue = (e) => {
@@ -11,8 +18,14 @@ function SelectForm({ list, selectValue = null, currentValue }) {
 
   return (
     <form className="select-form">
-      <label htmlFor="cars">Инструмент:</label>
-      <select name="cars" id="cars" onChange={handleSetValue} value={value} >
+      <label htmlFor={idLabel}>{title}</label>
+      <select
+        name={idLabel}
+        form={formId}
+        id={idLabel}
+        onChange={handleSetValue}
+        value={value}
+      >
         {list.map((item, index) => (
           <option
             className="select-form__option" 

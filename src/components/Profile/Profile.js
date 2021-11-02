@@ -1,13 +1,15 @@
 import { memo } from 'react';
-import SelectForm from '../SelectForm/SelectForm';
+import TaskForm from '../TaskForm/TaskForm';
 import './Profile.css';
 
 function Profile({ list, currentValue }) {
   return (
-    <SelectForm
-      list={list}
-      currentValue={currentValue}
-    />
+    <>
+      <TaskForm
+        list={list}
+        currentValue={currentValue}
+      />
+    </>
   )
 }
 
