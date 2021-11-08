@@ -9,6 +9,7 @@
   --color-accent-b: #4285F4;
   --color-accent-c: #EE3465;
   --transition-a: all .2s linear;
+  padding: 0 calc(50% - 500px);
   min-width: 320px;
   min-height: 100vh;
   display: flex;
@@ -19,4 +20,15 @@
   font-family: "Inter", "Arial", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.button {
+  transition: var(--transition-a);
+  border: none;
+  outline: none;
+}
+
+.button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }

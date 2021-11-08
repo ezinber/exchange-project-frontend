@@ -1,0 +1,70 @@
+.form {
+  width: min(100%, 396px);
+  min-height: 450px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__title {
+  margin: 0 0 40px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 29px;
+}
+
+.form__submit-button {
+  margin: 0;
+  height: 45px;
+  background-color: var(--color-accent-b, #4285F4);
+  color: var(--color-main, #fff);
+  border-radius: 3px;
+  border: none;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  transition: all .2s linear;
+}
+
+.form__submit-button_disabled {
+  background-color: var(--color-background-c, #272727);
+  color: var(--color-background-d, #303030);
+}
+
+.form__submit-button_disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
+.form__message {
+  margin: auto 0 5px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 12px;
+  color: var(--color-accent-a, #3DDC84);
+  visibility: hidden;
+  opacity: 0;
+  transition: all .2s linear;
+}
+
+.form__message_visible {
+  visibility: visible;
+  opacity: 1;
+  transition: all .2s linear;
+}
+
+.form__message_type_error {
+  color: var(--color-accent-c, #EE3465);
+}
+
+@media screen and (max-width: 420px) {
+  .form {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .form__title {
+    margin: 0 0 auto;
+    text-align: center;
+  }
+}

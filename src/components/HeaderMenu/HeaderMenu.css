@@ -1,5 +1,9 @@
 .header-menu {
   margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
 }
 
 .header-menu__list {
@@ -13,29 +17,48 @@
   display: flex;
 }
 
-.header-menu__list_type_drop {
-  position: absolute;
+.header-menu__button {
+  margin: auto 0 auto auto;
+  width: 24px;
+  height: 24px;
+  background: url('../../images/menu-button.svg') center no-repeat;
+  background-size: cover;
   display: none;
+  border: none;
+  z-index: 1;
+  cursor: pointer;
 }
 
-.header-menu__drop-list-wrapper {
-  position: relative;
+.header-menu__button_type_close {
+  background: url('../../images/close-button.svg') center no-repeat;
 }
 
 .header-menu__link {
   padding: .5rem;
   color: var(--color-main-a, #fff);
   text-decoration: none;
+  border: none;
   font-size: 16px;
   transition: var(--transition-a);
 }
 
 .header-menu__link:hover {
   color: var(--color-main-b);
+  cursor: pointer;
 }
 
 .header-menu__link_active {
   color: var(--color-accent-b, cyan);
+}
+
+.header-menu__link_hidden {
+  display: none;
+}
+
+.header-menu__link_type_auth {
+  margin: 0 .5rem;
+  background-color: var(--color-background-b);
+  border-radius: 4px;
 }
 
 .header-menu__link_active:hover {
@@ -44,4 +67,62 @@
 
 .header-menu__drop-list-wrapper:hover .header-menu__list_type_drop {
   display: block;
+}
+
+
+.header-menu__item:has(.header-menu__link_hidden) {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header-menu {
+    padding-left: calc(100% - 320px);
+    background-color: rgba(40, 44, 52, .9);;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    /*  TODO: избавиться от анимации сдвига при
+        изменении ширины экрана
+    transition: var(--transition-a);
+    */
+  }
+
+  .header-menu::before {
+    content: '';
+    height: 100%;
+    width: 320px;
+    background-color: var(--color-background-b);
+    position: absolute;
+    z-index: -1;
+  }
+
+  .header-menu_visible {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .header-menu__list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header-menu__list:last-child {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .header-menu__link_type_auth {
+    background-color: var(--color-background-a);
+  }
+
+  .header-menu__button {
+    display: block;
+  }
 }

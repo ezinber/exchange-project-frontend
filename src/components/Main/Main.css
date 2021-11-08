@@ -1,0 +1,24 @@
+.main {
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.main__article {
+  padding: 20px;
+  background-color: var(--color-background-b);
+  border-radius: 10px;
+  max-width: 600px;
+}
+
+.main__title {
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.main__subtitle {
+  margin: 0;
+  padding: 0;
+}

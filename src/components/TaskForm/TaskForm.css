@@ -1,0 +1,9 @@
+.task-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.task-form button {
+  align-self: flex-end;
+}
