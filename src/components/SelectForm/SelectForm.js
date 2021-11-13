@@ -7,12 +7,14 @@ function SelectForm({
   idLabel = 'select',
   formId,
   selectValue = null,
-  currentValue
+  currentValue,
+  onChange,
 }) {
   const [value, setValue] = useState(currentValue);
 
   const handleSetValue = (e) => {
     selectValue && selectValue(e.target.value);
+    onChange && onChange(e);
     setValue(e.target.value);
   }
 

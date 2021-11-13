@@ -1,7 +1,13 @@
 import { memo } from 'react';
 import './InputNumber.css';
 
-function InputNumber({ idLabel = 'number', title = 'number', formId }) {
+function InputNumber({
+  idLabel = 'number',
+  title = 'number',
+  formId,
+  currentValue,
+  onChange
+}) {
   return (
     <div className="input-number">
       <label htmlFor={idLabel}>
@@ -9,10 +15,12 @@ function InputNumber({ idLabel = 'number', title = 'number', formId }) {
       </label>
       <input
         className="input-number__input"
+        name={idLabel}
         form={formId}
         type="number"
         id={idLabel}
         min='1'
+        onChange={onChange}
         required
       />
     </div>

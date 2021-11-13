@@ -8,6 +8,8 @@
   --color-accent-a: #3DDC84;
   --color-accent-b: #4285F4;
   --color-accent-c: #EE3465;
+  --padding-text-a: .5rem;
+  --border-radius-a: 4px;
   --transition-a: all .2s linear;
   padding: 0 calc(50% - 500px);
   min-width: 320px;
@@ -22,13 +24,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.button {
+button {
   transition: var(--transition-a);
   border: none;
   outline: none;
 }
 
-.button:hover {
+button:hover {
   opacity: 0.6;
   cursor: pointer;
 }

@@ -4,7 +4,7 @@ import './Button.css';
 function Button({ title = 'ok', type = 'submit', formId }) {
   return (
     <button
-    className="button"
+      className="button"
       type={type}
       form={formId}
     >

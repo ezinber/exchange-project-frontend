@@ -30,7 +30,7 @@ function Form({ children, title, buttonName, onSubmit, isValid }) {
         {responseMessage}
       </span>
       <button
-        className={`form__submit-button ${!isValid || isLoading ? 'form__submit-button_disabled ' : 'button'}`}
+        className={`form__submit-button ${!isValid || isLoading ? 'form__submit-button_disabled ' : ''}`}
         type="submit"
         disabled={!isValid || isLoading}
       >
