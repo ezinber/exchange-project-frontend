@@ -10,9 +10,10 @@ import { createDataAndKeyArray } from '../../utils/utils';
 
 import "./Chart.css";
 
-function Chart({ orderBookData }) {
+function Chart({
+  orderBookData,
+}) {
   const [maxValues, setMaxValues] = useState({ asks: [[]], bids: [[]] })
-  //const isLoading = useContext(IsLoadingContext);
 
   const options = {
     chart: {
@@ -81,7 +82,7 @@ function Chart({ orderBookData }) {
     });
 
     return () => console.log('unmount')
-  }, [orderBookData])
+  }, [orderBookData]);
 
   return (
     <HighchartsReact

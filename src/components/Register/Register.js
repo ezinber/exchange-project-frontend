@@ -80,7 +80,7 @@ function Register({ onRegister }) {
       <p className="register__question">
         <span className="register__question">
           Уже зарегистрированы?&nbsp;
-          <NavLink className="register__link button" to="/login">
+          <NavLink className="register__link" to="/login">
             Войти
           </NavLink>
         </span>

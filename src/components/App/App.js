@@ -26,6 +26,7 @@ import {
 } from "../../utils/constants";
 import "./App.css";
 import Profile from "../Profile/Profile";
+import Markets from "../Markets/Markets";
 
 const { successUpdateMessage } = responseSuccessMessages;
 const {
@@ -75,6 +76,7 @@ function App() {
         .then((res) => {
           setCurrentUser({ email: res.email, username: res.username });
         })
+        .then(() => handleGetOrderBookTickers())
         .catch(() => console.log("error"));
     }
   };
@@ -116,7 +118,6 @@ function App() {
     console.log('app-mount');
 
     handleTokenCheck();
-    handleGetOrderBookTickers();
   }, []);
 
   return (
@@ -141,12 +142,10 @@ function App() {
               </ProtectedRoute>
 
               <ProtectedRoute path="/markets">
-                <SelectForm
+                <Markets
                   list={orderBookTickersList}
                   selectValue={handleSetCurrentTicker}
                   currentValue={currentTicker}
-                />
-                <Chart
                   orderBookData={currentOrderBookData}
                 />
               </ProtectedRoute>

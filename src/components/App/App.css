@@ -22,13 +22,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.button {
+button {
   transition: var(--transition-a);
   border: none;
   outline: none;
 }
 
-.button:hover {
+button:hover {
   opacity: 0.6;
   cursor: pointer;
 }

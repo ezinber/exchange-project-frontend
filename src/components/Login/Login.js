@@ -66,7 +66,7 @@ function Login({ onLogin }) {
       <p className="login__question">
         <span className="login__question">
           Ещё не зарегистрированы?&nbsp;
-          <NavLink className="login__link button" to="/register">
+          <NavLink className="login__link" to="/register">
             Регистрация
           </NavLink>
         </span>
