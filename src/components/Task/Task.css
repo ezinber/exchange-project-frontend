@@ -1,8 +1,10 @@
 .task {
   margin: 0;
   padding: 20px;
+  min-width: 200px;
   display: grid;
-  grid-template-columns: 1fr, 1fr;
+  grid-template-columns: 1fr max-content max-content;
+  grid-gap: 20px;
   flex-direction: column;
   background-color: var(--color-background-b);
   border-radius: var(--border-radius-a);
@@ -30,8 +32,32 @@
   border-radius: var(--border-radius-a);
 }
 
+.task__title {
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 600;
+  grid-column: 1 / 4;
+}
+
+.task__count {
+  margin: auto 0;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-main-a);
+  border-radius: 50%;
+  font-weight: 500;
+  line-height: 1;
+  grid-column: 1 / 2;
+}
+
 .task__button {
-  margin: 20px auto 0;
+  margin: 0;
   padding: 0;
   width: 2rem;
   height: 2rem;
@@ -40,10 +66,14 @@
 
 .task__button_type_edit {
   background-color: var(--color-accent-a);
-  grid-column: 1 / 2;
+  grid-column: 2 / 3;
 }
 
 .task__button_type_delete {
   background-color: var(--color-accent-c);
-  grid-column: 2 / 3;
+  grid-column: 3 / 4;
+}
+
+.task__button_inactive {
+  background-color: none;
 }

@@ -36,7 +36,7 @@ const {
 } = responseErrorMessages;
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({ username: 'test', email: 'test@gmail.com' });
   const [isLoading, setIsLoading] = useState(false);
   const [responseMessage, setResponseMessage] = useState(null);
   const [orderBookTickersList, setOrderBookTickersList] = useState([]);
