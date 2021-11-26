@@ -127,7 +127,9 @@ function App() {
           value={{ responseMessage, handleResetResponseMessage }}
         >
           <div className="app">
-            <Header onLogout={handleSignout} />
+            <Header
+              onLogout={handleSignout}
+            />
             <Switch>
               <ProtectedRoute path="/markets/stock">
                 <p>markets</p>

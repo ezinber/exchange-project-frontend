@@ -9,16 +9,21 @@ function HeaderMenu({ onLogout }) {
 
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
-  const handleMenuButtonClick = () => setIsMenuOpened(!isMenuOpened);
-  // TODO: предотвратить закрытие меню при клике мимо ссылки
-  const handleMenuClose = (e) =>
-    e.target.closest(".header-menu_visible") && setIsMenuOpened(false);
+  const handleMenuButtonClick = (e) => {
+      setIsMenuOpened(!isMenuOpened);
+      !isMenuOpened
+        ? document.body.style.overflow = "hidden" //prevent body scroll
+        : document.body.style.overflow = "";
+  }
 
   return (
     <>
+      <div
+        className={`header-menu__backdrop${isMenuOpened ? ' header-menu__backdrop_visible' : ''}`}
+        onClick={handleMenuButtonClick}
+      />
       <nav
         className={`header-menu${isMenuOpened ? " header-menu_visible" : ""}`}
-        onClick={handleMenuClose}
       >
         <ul className="header-menu__list">
           <li className="header-menu__item">
