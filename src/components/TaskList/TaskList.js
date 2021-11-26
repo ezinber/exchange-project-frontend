@@ -54,7 +54,7 @@ function TaskList({ tasks = mockTasks }) {
         />
       ))}
       <button
-        className="task-list__add-task"
+        className="task-list__add-button"
         title="Добавить задачу"
       />
     </ul>

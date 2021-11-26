@@ -1,15 +1,40 @@
 .task-list {
   margin: 0;
-  padding: 0;
+  padding: var(--padding-a, 20px);
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: var(--padding-a, 20px);
 }
 
-.task-list__add-task {
+.task-list__add-button {
+  --border-width: 2px;
+  margin: 0;
+  padding: 0;
   width: 200px;
   height: 110px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
-  border: 2px solid var(--color-background-b);
+  border: var(--border-width) solid var(--color-background-b);
   border-radius: var(--border-radius-a);
+}
+
+.task-list__add-button::before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: var(--border-width);
+  width: 40px;
+  background: var(--color-background-b);
+}
+
+.task-list__add-button::after {
+  content: '';
+  display: block;
+  position: absolute;
+  height: 40px;
+  width: var(--border-width);
+  background: var(--color-background-b);
 }
