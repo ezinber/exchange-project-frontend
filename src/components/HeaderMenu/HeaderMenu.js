@@ -111,11 +111,15 @@ function HeaderMenu({ onLogout }) {
       </nav>
       <button
         className={`header-menu__button${
-          isMenuOpened ? " header-menu__button_type_close" : ""
+          isMenuOpened ? " header-menu__button_open" : ""
         }`}
         type="button"
         onClick={handleMenuButtonClick}
-      />
+      >
+        <div className={`header-menu__burger${
+          isMenuOpened ? " header-menu__burger_open" : ""
+        }`}></div>
+      </button>
     </>
   );
 }
