@@ -9,7 +9,7 @@ function HeaderMenu({ onLogout }) {
 
   const [isMenuOpened, setIsMenuOpened] = useState(false);
 
-  const handleMenuButtonClick = (e) => {
+  const handleMenuButtonClick = () => {
       setIsMenuOpened(!isMenuOpened);
       !isMenuOpened
         ? document.body.style.overflow = "hidden" //prevent body scroll

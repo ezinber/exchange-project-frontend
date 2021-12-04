@@ -11,6 +11,7 @@ function TaskForm({
   list,
   stockList = ['MOEX', 'NYSE'],
   currentValue,
+  addTask
 }) {
   const { values, handleChange, errors, isValid, resetForm } =
     useFormWithValidation();
@@ -25,9 +26,7 @@ function TaskForm({
   const handleSubmit = (e) => {
     e.preventDefault();
     const isChecked = checkbox.current.hasAttribute('checked');
-
-    //TODO: create actual submit
-    console.log({ tickerValue, stockValue, numberValue, isChecked });
+    addTask({ ticker: tickerValue, stock: stockValue, period: numberValue, status: isChecked })
   }
 
   return (

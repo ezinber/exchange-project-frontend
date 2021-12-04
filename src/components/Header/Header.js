@@ -2,7 +2,7 @@ import { memo } from 'react';
 import HeaderMenu from '../HeaderMenu/HeaderMenu';
 import './Header.css';
 
-function Header({ onLogout, onModalOpen }) {
+function Header({ onLogout }) {
   return (
     <header className="header">
       <img
@@ -11,7 +11,6 @@ function Header({ onLogout, onModalOpen }) {
       ></img>
       <HeaderMenu
         onLogout={onLogout}
-        onModalOpen={onModalOpen}
       />
     </header>
   )
