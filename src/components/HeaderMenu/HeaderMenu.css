@@ -25,6 +25,7 @@
   margin: 0;
   padding: 0;
   display: flex;
+  gap: 10px;
   list-style: none;
 }
 
@@ -114,7 +115,6 @@
 }
 
 .header-menu__link_type_auth {
-  margin: 0 .5rem;
   background-color: var(--color-background-b);
   border-radius: 4px;
 }

@@ -5,7 +5,6 @@
   display: grid;
   grid-template-columns: 1fr max-content max-content;
   grid-gap: 20px;
-  flex-direction: column;
   background-color: var(--color-background-b);
   border-radius: var(--border-radius-a);
 }
