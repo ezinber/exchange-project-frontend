@@ -2,7 +2,7 @@ import { memo } from 'react';
 import Task from '../Task/Task';
 import './TaskList.css';
 
-function TaskList({ tasks }) {
+function TaskList({ tasks, onAddTask }) {
   return (
     <ul className="task-list">
       {tasks.map((task, index) => (
@@ -18,6 +18,7 @@ function TaskList({ tasks }) {
         className="task-list__add-button"
         type="button"
         title="Добавить задачу"
+        onClick={onAddTask}
       />
     </ul>
   )

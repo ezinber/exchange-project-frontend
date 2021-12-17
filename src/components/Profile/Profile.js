@@ -42,17 +42,15 @@ const mockTasks = [
   },
 ]
 
-function Profile({ list, currentValue }) {
+function Profile({ list, currentValue, onAddTask }) {
   const [currentList, setCurrentList] = useState(mockTasks);
   const addTask = (task) => setCurrentList([task, ...currentList]);
   return (
     <>
-      <TaskForm
-        list={list}
-        currentValue={currentValue}
-        addTask={addTask}
+      <TaskList
+        tasks={currentList}
+        onAddTask={onAddTask}
       />
-      <TaskList tasks={currentList}/>
     </>
   )
 }

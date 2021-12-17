@@ -7,7 +7,7 @@
 }
 
 .header-menu__backdrop {
-  background-color: rgba(40, 44, 52, .7);;
+  background-color: var(--color-backdrop-a, rgba(40, 44, 52, .7));
   position: fixed;
   left: 0;
   right: 0;

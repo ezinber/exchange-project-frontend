@@ -27,6 +27,8 @@ import {
 import "./App.css";
 import Profile from "../Profile/Profile";
 import Markets from "../Markets/Markets";
+import Popup from "../Popup/Popup";
+import TaskForm from "../TaskForm/TaskForm";
 
 const { successUpdateMessage } = responseSuccessMessages;
 const {
@@ -44,10 +46,13 @@ function App() {
     asks: [],
     bids: [],
   });
+  const [isAddTaskPopupOpen, setIsAddTaskPopupOpen] = useState(false);
 
   const history = useHistory();
   const currentTicker = currentOrderBookData.asks[0]?.ticker || '';
 
+
+  // Блок авторизации
   const handleSignin = (email, password) => {
     setIsLoading(true);
     signin(email, password)
@@ -87,8 +92,8 @@ function App() {
     history.push("/");
   };
 
-  const handleResetResponseMessage = () => setResponseMessage(null);
 
+  // Блок работы с тикерами
   const handleGetOrderBookData = (start, end, ticker) => {
     setIsLoading(true);
     const jwt = localStorage.getItem("jwt");
@@ -113,6 +118,21 @@ function App() {
 
   const handleSetCurrentTicker = (ticker) =>
     handleGetOrderBookData("2021-10-25|00:44:00", "2021-10-29|23:59:20", ticker);
+
+
+  // Блок работы с сообщениями от сервера и попапами
+  const handleResetResponseMessage = () => setResponseMessage(null);
+
+  const handleCloseAllPopups = () => {
+    setIsAddTaskPopupOpen(false);
+  }
+
+  const handleOpenAddTaskPopup = () => {
+    console.log('open');
+    setIsAddTaskPopupOpen(true);
+  }
+
+
 
   useEffect(() => {
     console.log('app-mount');
@@ -156,6 +176,7 @@ function App() {
                 <Profile
                   list={orderBookTickersList}
                   currentValue={currentTicker}
+                  onAddTask={handleOpenAddTaskPopup}
                 />
               </ProtectedRoute>
 
@@ -181,6 +202,20 @@ function App() {
                 <Main />
               </Route>
             </Switch>
+
+            <Popup
+              isOpen={isAddTaskPopupOpen}
+              onClose={handleCloseAllPopups}
+              onAddTask={handleOpenAddTaskPopup}
+            >
+              <TaskForm
+                list={orderBookTickersList}
+                currentValue={currentTicker}
+                /* TODO: настроить добавление задачи через попап */
+                // addTask={}
+              />
+            </Popup>
+
           </div>
         </ResponseMessageContext.Provider>
       </IsLoadingContext.Provider>
