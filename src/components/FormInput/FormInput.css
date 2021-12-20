@@ -1,33 +1,41 @@
 .form-input {
   margin: 10px 0 2px;
-  padding: 0 15px;
-  height: 46px;
+  padding: 0 12px;
+  height: 42px;
   background: var(--color-background-b, #303030);
-  color: var(--color-main-a, #fff);
-  border: none;
-  border-radius: 8px;
+  color: var(--color-main-b, #fff);
+  border: 2px solid var(--color-background-b);
+  border-radius: var(--border-radius-a);
   font-weight: 500;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 16px;
   outline: none;
-  transition: color .2s linear;
+  transition: border .2s linear, color .2s linear;
 }
 
-.form-input_type_error {
+.form-input_color_inverted {
+  background: var(--color-background-a);
+  border: 2px solid var(--color-background-a);
+  color: var(--color-main-a, #fff);
+}
+
+.form-input_color_error {
   color: var(--color-accent-c, #EE3465);
-  transition: color .2s linear;
 }
 
 .form-input:focus {
   border: 2px solid var(--color-main-b);
-  padding: 0 13px;
 }
 
 .form-input__label {
   min-height: 12px;
   font-weight: 400;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 12px;
+  color: var(--color-main-a);
+}
+
+.form-input__label_color_inverted {
   color: var(--color-main-b);
 }
 

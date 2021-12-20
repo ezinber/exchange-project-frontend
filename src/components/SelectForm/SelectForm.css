@@ -1,5 +1,5 @@
 .select-form {
-  padding: 20px;
+  padding: 0 0 var(--padding-a, 20px);
   display: flex;
   flex-direction: column;
   align-items: flex-start;

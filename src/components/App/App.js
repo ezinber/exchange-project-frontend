@@ -12,7 +12,6 @@ import Header from "../Header/Header";
 import Chart from "../Chart/Chart";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import SelectForm from "../SelectForm/SelectForm";
 
 import {
   signin,
@@ -27,8 +26,7 @@ import {
 import "./App.css";
 import Profile from "../Profile/Profile";
 import Markets from "../Markets/Markets";
-import Popup from "../Popup/Popup";
-import TaskForm from "../TaskForm/TaskForm";
+import AddTaskPopup from "../AddTaskPopup/AddTaskPopup";
 
 const { successUpdateMessage } = responseSuccessMessages;
 const {
@@ -46,6 +44,7 @@ function App() {
     asks: [],
     bids: [],
   });
+  const [userTasksList, setUserTasksList] = useState(mockTasks);
   const [isAddTaskPopupOpen, setIsAddTaskPopupOpen] = useState(false);
 
   const history = useHistory();
@@ -119,6 +118,11 @@ function App() {
   const handleSetCurrentTicker = (ticker) =>
     handleGetOrderBookData("2021-10-25|00:44:00", "2021-10-29|23:59:20", ticker);
 
+  const handleAddNewTask = (task) => {
+    setUserTasksList([task, ...userTasksList]);
+    handleCloseAllPopups();
+  }
+
 
   // Блок работы с сообщениями от сервера и попапами
   const handleResetResponseMessage = () => setResponseMessage(null);
@@ -128,7 +132,6 @@ function App() {
   }
 
   const handleOpenAddTaskPopup = () => {
-    console.log('open');
     setIsAddTaskPopupOpen(true);
   }
 
@@ -174,9 +177,8 @@ function App() {
 
               <ProtectedRoute path="/profile">
                 <Profile
-                  list={orderBookTickersList}
-                  currentValue={currentTicker}
-                  onAddTask={handleOpenAddTaskPopup}
+                  tasksList={userTasksList}
+                  onAddTaskClick={handleOpenAddTaskPopup}
                 />
               </ProtectedRoute>
 
@@ -203,18 +205,13 @@ function App() {
               </Route>
             </Switch>
 
-            <Popup
+            <AddTaskPopup
               isOpen={isAddTaskPopupOpen}
               onClose={handleCloseAllPopups}
-              onAddTask={handleOpenAddTaskPopup}
-            >
-              <TaskForm
-                list={orderBookTickersList}
-                currentValue={currentTicker}
-                /* TODO: настроить добавление задачи через попап */
-                // addTask={}
-              />
-            </Popup>
+              onSubmit={handleAddNewTask}
+              tickerList={orderBookTickersList}
+              currentValue={currentTicker}
+            />
 
           </div>
         </ResponseMessageContext.Provider>
@@ -224,3 +221,44 @@ function App() {
 }
 
 export default App;
+
+
+// TODO: delete mocks
+const mockTasks = [
+  {
+    ticker: 'USD',
+    stock: 'NYEX',
+    period: 1,
+    status: false,
+  },
+  {
+    ticker: 'GPB',
+    stock: 'NYEX',
+    period: 6,
+    status: true,
+  },
+  {
+    ticker: 'RUB',
+    stock: 'NYEX',
+    period: 3,
+    status: true,
+  },
+  {
+    ticker: 'GLD',
+    stock: 'NYEX',
+    period: 1,
+    status: false,
+  },
+  {
+    ticker: 'USD',
+    stock: 'NYEX',
+    period: 2,
+    status: false,
+  },
+  {
+    ticker: 'EUR',
+    stock: 'NYEX',
+    period: 1,
+    status: true,
+  },
+]

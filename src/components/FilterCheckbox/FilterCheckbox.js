@@ -6,7 +6,8 @@ function FilterCheckbox({
   formId,
   idLabel = 'checkbox',
   inputRef,
-  onCheck = null
+  onCheck = null,
+  colorMod,
 }) {
   const handleChange = () => {
     const isChecked = inputRef.current.hasAttribute('checked');
@@ -28,7 +29,8 @@ function FilterCheckbox({
         onChange={handleChange}
         ref={inputRef}
       />
-      <span className="filter-checkbox__visible-checkbox" />
+      <span className={`filter-checkbox__visible-checkbox${colorMod ?
+        ' filter-checkbox__visible-checkbox_color_' + colorMod : ''}`} />
       {title}
     </label>
   )

@@ -50,6 +50,7 @@ function Login({ onLogin }) {
           error={emailError}
           onChange={handleChange}
           required={true}
+          colorMod=""
         />
         <FormInput
           label="Пароль"
@@ -60,6 +61,7 @@ function Login({ onLogin }) {
           onChange={handleChange}
           minLength="8"
           required={true}
+          colorMod=""
         />
       </Form>
 

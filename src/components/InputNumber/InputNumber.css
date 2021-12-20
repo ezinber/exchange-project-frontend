@@ -1,5 +1,5 @@
 .input-number {
-  padding: 20px;
+  padding: 0 0 var(--padding-a, 20px);
   max-width: 160px;
   display: flex;
   flex-direction: column;

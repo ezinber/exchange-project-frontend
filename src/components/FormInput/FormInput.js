@@ -11,7 +11,12 @@ function FormInput({
   minLength = '2',
   maxLength = '30',
   required = false,
+  colorMod = '', // 'inverted'
+  selectList,
 }) {
+  const inputColorMod = error ? 'error' : colorMod;
+  const isNumber = type === 'number';
+
   let pattern = '.+';
 
   if (type === 'text') {
@@ -24,23 +29,48 @@ function FormInput({
 
   return (
     <>
-      <span className="form-input__label">
+      <span className={`form-input__label${colorMod ? ' form-input__label_color_' + colorMod : ''}`}>
         {label}
       </span>
-      <input
-        className={`form-input${error ? ' form-input_type_error' : ''}`}
-        type={type}
-        name={name}
-        pattern={pattern}
-        value={value}
-        onChange={onChange}
-        minLength={minLength}
-        maxLength={maxLength}
-        required={required}
-      />
-      <span className={`form-input__error${error ? ' form-input__error_visible' : ''}`}>
-        {error}
-      </span>
+
+      {!selectList ? (
+        <>
+          <input
+            className={`form-input${inputColorMod ? ' form-input_color_' + inputColorMod : ''}`}
+            type={type}
+            name={name}
+            value={value}
+            onChange={onChange}
+            pattern={!isNumber && pattern}
+            min={isNumber && minLength}
+            max={isNumber && maxLength}
+            minLength={!isNumber && minLength}
+            maxLength={!isNumber && maxLength}
+            required={required}
+          />
+          <span className={`form-input__error${error ? ' form-input__error_visible' : ''}`}>
+            {error}
+          </span>
+        </>
+      ) : (
+        <select
+          className={`form-input${inputColorMod ? ' form-input_color_' + inputColorMod : ''}`}
+          name={name}
+          onChange={onChange}
+          value={value}
+        >
+          {selectList.map((item, index) => (
+            <option
+              className="select-form__option"
+              value={item}
+              key={index}
+            >
+              {item}
+            </option>
+          ))}
+        </select>
+      )}
+
     </>
   )
 }

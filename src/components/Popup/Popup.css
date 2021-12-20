@@ -20,7 +20,7 @@
 }
 
 .popup__container {
-  padding: 35px;
+  padding: var(--padding-a, 20px);
   min-width: 280px;
   position: relative;
   background: var(--color-background-b, #fff);
