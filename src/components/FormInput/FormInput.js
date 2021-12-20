@@ -28,15 +28,13 @@ function FormInput({
   };
 
   return (
-    <>
-      <span className={`form-input__label${colorMod ? ' form-input__label_color_' + colorMod : ''}`}>
+      <label className={`form-input${colorMod ? ' form-input_color_' + colorMod : ''}`}>
         {label}
-      </span>
 
       {!selectList ? (
         <>
           <input
-            className={`form-input${inputColorMod ? ' form-input_color_' + inputColorMod : ''}`}
+            className={`form-input__field${inputColorMod ? ' form-input__field_color_' + inputColorMod : ''}`}
             type={type}
             name={name}
             value={value}
@@ -48,13 +46,16 @@ function FormInput({
             maxLength={!isNumber && maxLength}
             required={required}
           />
-          <span className={`form-input__error${error ? ' form-input__error_visible' : ''}`}>
-            {error}
-          </span>
+
+          {!isNumber && (
+            <span className={`form-input__error${error ? ' form-input__error_visible' : ''}`}>
+              {error}
+            </span>
+          )}
         </>
       ) : (
         <select
-          className={`form-input${inputColorMod ? ' form-input_color_' + inputColorMod : ''}`}
+          className={`form-input__field${inputColorMod ? ' form-input__field_color_' + inputColorMod : ''}`}
           name={name}
           onChange={onChange}
           value={value}
@@ -70,8 +71,7 @@ function FormInput({
           ))}
         </select>
       )}
-
-    </>
+      </label>
   )
 }
 

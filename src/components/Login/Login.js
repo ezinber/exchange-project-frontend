@@ -31,11 +31,6 @@ function Login({ onLogin }) {
 
   return (
     <div className="login">
-      {/* TODO: delete
-      <div className="login__logo-wrapper">
-        <p>logo</p>
-      </div>
-      */}
       <Form
         title="Рады видеть!"
         buttonName="Войти"
