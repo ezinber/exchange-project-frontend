@@ -34,7 +34,7 @@
   color: var(--color-main-a, #fff);
 }
 
-.form-input__field_color_error {
+.form-input__field_type_error {
   color: var(--color-accent-c, #EE3465);
 }
 

@@ -4,16 +4,28 @@ import {
   ResponseMessageContext,
   compareWithErrorMessages,
 } from '../../contexts/ResponseMessageContext';
+import { makeClassName } from '../../utils/utils';
 import './Form.css';
 
 function Form({ children, title, buttonName, onSubmit, isValid }) {
-  const {responseMessage, handleResetResponseMessage} = useContext(ResponseMessageContext);
+  const {responseMessage, handleSetResponseMessage} = useContext(ResponseMessageContext);
   const isLoading = useContext(IsLoadingContext);
 
   const isResponseError = compareWithErrorMessages(responseMessage);
 
+  const formMessageClassName = makeClassName([
+    'form__message',
+    [isResponseError, '_type_error'],
+    [responseMessage, '_visible'],
+  ])
+
+  const formSubmitButtonClassName = makeClassName([
+    'form__submit-button',
+    [!isValid || isLoading, '_disabled']
+  ])
+
   useEffect(() => {
-    return () => handleResetResponseMessage();
+    return () => handleSetResponseMessage();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -26,11 +38,11 @@ function Form({ children, title, buttonName, onSubmit, isValid }) {
 
       {children}
 
-      <span className={`form__message${responseMessage ? ' form__message_visible' : ''}${isResponseError ? ' form__message_type_error' : ''}`}>
+      <span className={formMessageClassName}>
         {responseMessage}
       </span>
       <button
-        className={`form__submit-button ${!isValid || isLoading ? 'form__submit-button_disabled ' : ''}`}
+        className={formSubmitButtonClassName}
         type="submit"
         disabled={!isValid || isLoading}
       >

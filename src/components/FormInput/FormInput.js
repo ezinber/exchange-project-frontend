@@ -1,4 +1,5 @@
 import { memo } from "react";
+import { makeClassName } from "../../utils/utils";
 import './FormInput.css';
 
 function FormInput({
@@ -11,10 +12,9 @@ function FormInput({
   minLength = '2',
   maxLength = '30',
   required = false,
-  colorMod = '', // 'inverted'
+  colorMod, // 'inverted'
   selectList,
 }) {
-  const inputColorMod = error ? 'error' : colorMod;
   const isNumber = type === 'number';
 
   let pattern = '.+';
@@ -27,14 +27,31 @@ function FormInput({
     pattern = '.+@.+\\..+';
   };
 
+  const formInputClassName = makeClassName([
+    'form-input',
+    [colorMod, `_color_${colorMod}`],
+    [error, '_type_error']
+  ]);
+
+  const formInputFieldClassName = makeClassName([
+    'form-input__field',
+    [colorMod, `_color_${colorMod}`],
+    [error, '_type_error']
+  ])
+
+  const formInputErrorClassName = makeClassName([
+    'form-input__error',
+    [error, '_visible']
+  ])
+
   return (
-      <label className={`form-input${colorMod ? ' form-input_color_' + colorMod : ''}`}>
+      <label className={formInputClassName}>
         {label}
 
       {!selectList ? (
         <>
           <input
-            className={`form-input__field${inputColorMod ? ' form-input__field_color_' + inputColorMod : ''}`}
+            className={formInputFieldClassName}
             type={type}
             name={name}
             value={value}
@@ -48,14 +65,14 @@ function FormInput({
           />
 
           {!isNumber && (
-            <span className={`form-input__error${error ? ' form-input__error_visible' : ''}`}>
+            <span className={formInputErrorClassName}>
               {error}
             </span>
           )}
         </>
       ) : (
         <select
-          className={`form-input__field${inputColorMod ? ' form-input__field_color_' + inputColorMod : ''}`}
+          className={formInputFieldClassName}
           name={name}
           onChange={onChange}
           value={value}

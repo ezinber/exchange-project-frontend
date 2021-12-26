@@ -20,7 +20,10 @@ function FilterCheckbox({
   }
 
   return (
-    <label htmlFor={idLabel} className="filter-checkbox">
+    <label
+      htmlFor={idLabel}
+      className={`filter-checkbox${colorMod ? ' filter-checkbox_color_' + colorMod : ''}`}
+    >
       <input
         className="filter-checkbox__invisible-checkbox"
         form={formId}

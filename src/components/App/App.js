@@ -57,18 +57,18 @@ function App() {
     signin(email, password)
       .then((res) => {
         localStorage.setItem("jwt", res.access);
-        responseMessage && setResponseMessage(null);
+        handleSetResponseMessage();
         return handleTokenCheck();
       })
       .then(() => history.push("/markets"))
       .catch((err) => {
         if (err === 400) {
-          return setResponseMessage(incorrectDataMessage);
+          return handleSetResponseMessage(incorrectDataMessage);
         }
         if (err === 401) {
-          return setResponseMessage(incorrectCredentialsMessage);
+          return handleSetResponseMessage(incorrectCredentialsMessage);
         }
-        return setResponseMessage(somethingWentWrong);
+        return handleSetResponseMessage(somethingWentWrong);
       })
       .finally(() => setIsLoading(false));
   };
@@ -125,7 +125,11 @@ function App() {
 
 
   // Блок работы с сообщениями от сервера и попапами
-  const handleResetResponseMessage = () => setResponseMessage(null);
+  const handleSetResponseMessage = (message) =>
+    message
+      ? setResponseMessage(message)
+      : responseMessage // TODO: test feature
+      && setResponseMessage(null);
 
   const handleCloseAllPopups = () => {
     setIsAddTaskPopupOpen(false);
@@ -147,7 +151,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <IsLoadingContext.Provider value={isLoading}>
         <ResponseMessageContext.Provider
-          value={{ responseMessage, handleResetResponseMessage }}
+          value={{ responseMessage, handleSetResponseMessage }}
         >
           <div className="app">
             <Header

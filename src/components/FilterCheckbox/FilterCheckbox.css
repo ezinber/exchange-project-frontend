@@ -6,7 +6,12 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 12px;
+  color: var(--color-main-a);
 }
+
+  .filter-checkbox_color_inverted {
+    color: var(--color-main-b);
+  }
 
   .filter-checkbox__invisible-checkbox {
     display: none;
