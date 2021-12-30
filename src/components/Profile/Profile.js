@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import TaskList from '../TaskList/TaskList';
+import TickerList from '../TickerList/TickerList';
 import './Profile.css';
 
 function Profile({ onAddTaskClick, tasksList }) {
@@ -10,6 +11,7 @@ function Profile({ onAddTaskClick, tasksList }) {
         tasks={tasksList}
         onAddTaskClick={onAddTaskClick}
       />
+      <TickerList />
     </>
   )
 }

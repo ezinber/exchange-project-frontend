@@ -1,0 +1,8 @@
+.ticker-list {
+  margin: 0;
+  padding: var(--padding-a, 20px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+}

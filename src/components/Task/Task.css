@@ -1,10 +1,10 @@
 .task {
   margin: 0;
-  padding: 20px;
+  padding: var(--padding-a, 20px);
   min-width: 200px;
   display: grid;
   grid-template-columns: 1fr max-content max-content;
-  grid-gap: 20px;
+  grid-gap: var(--padding-a, 20px);
   background-color: var(--color-background-b);
   border-radius: var(--border-radius-a);
 }
