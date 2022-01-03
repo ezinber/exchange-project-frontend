@@ -56,11 +56,11 @@ function FormInput({
             name={name}
             value={value}
             onChange={onChange}
-            pattern={!isNumber && pattern}
-            min={isNumber && minLength}
-            max={isNumber && maxLength}
-            minLength={!isNumber && minLength}
-            maxLength={!isNumber && maxLength}
+            pattern={!isNumber ? pattern : undefined}
+            min={isNumber ? minLength : undefined}
+            max={isNumber ? maxLength : undefined}
+            minLength={!isNumber ? minLength : undefined}
+            maxLength={!isNumber ? maxLength : undefined}
             required={required}
           />
 
