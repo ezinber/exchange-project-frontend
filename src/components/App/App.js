@@ -18,6 +18,8 @@ import {
   checkToken,
   getOrderBookData,
   getOrderBookTickers,
+  addTask,
+  getTasks,
 } from "../../utils/MainApi";
 import {
   responseSuccessMessages,
@@ -118,9 +120,36 @@ function App() {
   const handleSetCurrentTicker = (ticker) =>
     handleGetOrderBookData("2021-10-25|00:44:00", "2021-10-29|23:59:20", ticker);
 
+
+  // Блок работы с задачами
+  const handleGetTasks = () => {
+    const jwt = localStorage.getItem("jwt");
+    getTasks(jwt)
+      .then((res) => setUserTasksList(res))
+      .catch(() => console.log('getTasks error'));
+  }
+
   const handleAddNewTask = (task) => {
+    // TODO: убрать заглушку, реализовать запрос
     setUserTasksList([task, ...userTasksList]);
     handleCloseAllPopups();
+    /*
+    const jwt = localStorage.getItem("jwt");
+    addTask(
+      jwt,
+      task.id,
+      task.ticker,
+      currentUser.username,
+      task.exchange,
+      task.record_period,
+      task.status,
+    ).then(() => {
+      handleGetTasks(jwt)
+        .then(() => handleCloseAllPopups())
+        .catch(() => console.log('getTasks error'))
+    })
+    .catch(() => console.log('error'));
+    */
   }
 
 
@@ -230,39 +259,45 @@ export default App;
 // TODO: delete mocks
 const mockTasks = [
   {
+    id: 1,
     ticker: 'USD',
-    stock: 'NYEX',
-    period: 1,
+    exchange: 'NYEX',
+    record_period: 1,
     status: false,
   },
   {
+    id: 2,
     ticker: 'GPB',
-    stock: 'NYEX',
-    period: 6,
+    exchange: 'NYEX',
+    record_period: 6,
     status: true,
   },
   {
+    id: 3,
     ticker: 'RUB',
-    stock: 'NYEX',
-    period: 3,
+    exchange: 'NYEX',
+    record_period: 3,
     status: true,
   },
   {
+    id: 4,
     ticker: 'GLD',
-    stock: 'NYEX',
+    exchange: 'NYEX',
     period: 1,
     status: false,
   },
   {
+    id: 5,
     ticker: 'USD',
-    stock: 'NYEX',
-    period: 2,
+    exchange: 'NYEX',
+    record_period: 2,
     status: false,
   },
   {
+    id: 6,
     ticker: 'EUR',
-    stock: 'NYEX',
-    period: 1,
+    exchange: 'NYEX',
+    record_period: 1,
     status: true,
   },
 ]

@@ -1,8 +1,8 @@
 export const makeClassName = (arr) => {
-  let mainClass = ''
-  
+  let mainClass = '';
+
   if (Array.isArray(arr) && typeof arr[0] === 'string') {
-    mainClass = arr[0]; 
+    mainClass = arr[0];
   } else {
     return;
   }
@@ -17,6 +17,8 @@ export const makeClassName = (arr) => {
         && typeof arr[i][1] === 'string'
       ) {
         className += ` ${/^_/.test(arr[i][1]) ? mainClass : ''}${arr[i][1]}`;
+      } else if (typeof arr[i] === 'string') {
+        className += ` ${/^_/.test(arr[i]) ? mainClass : ''}${arr[i]}`;
       }
     }
   }

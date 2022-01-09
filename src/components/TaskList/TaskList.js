@@ -5,13 +5,13 @@ import './TaskList.css';
 function TaskList({ tasks, onAddTaskClick }) {
   return (
     <ul className="task-list">
-      {tasks.map((task, index) => (
+      {tasks.map((task) => (
         <Task
           ticker={task.ticker}
-          stock={task.stock}
-          period={task.period}
+          stock={task.exchange}
+          period={task.record_period}
           status={task.status}
-          key={index}
+          key={task.id}
         />
       ))}
       <button

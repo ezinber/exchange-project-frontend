@@ -37,13 +37,13 @@ export const signout = () => {
     credentials: "include",
   }).then((res) => handleFirstResponse(res));
 };
-
+/*
 export const getUser = () => {
   return fetch(`${BASE_URL}/users/me`, {
     credentials: "include",
   }).then((res) => handleFirstResponse(res));
 };
-
+/*
 export const updateUser = (name, email) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
@@ -57,7 +57,7 @@ export const updateUser = (name, email) => {
     }),
   }).then((res) => handleFirstResponse(res));
 };
-
+*/
 export const checkToken = (token) => {
   return fetch(`${BASE_URL}/user/users/me/`, {
     method: "GET",
@@ -91,3 +91,39 @@ export const getOrderBookTickers = (token) => {
     },
   }).then((res) => handleFirstResponse(res));
 };
+
+export const getTasks = (token) => {
+  return fetch(`${BASE_URL}/user-periodic-tasks/`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => handleFirstResponse(res));
+}
+
+export const addTask = (
+  token,
+  id,
+  ticker,
+  user,
+  exchange,
+  record_period,
+  status,
+) => {
+  return fetch(`${BASE_URL}/user-periodic-tasks/`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({
+      id,
+      ticker,
+      user,
+      exchange,
+      record_period,
+      status,
+    }),
+  }).then((res) => handleFirstResponse(res));
+}
